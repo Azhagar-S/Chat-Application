@@ -70,7 +70,7 @@ export const allUser = async(req,res)=>{
             {email:{$regex: req.query.search , $options:'i'}}
         ]} : {}
 
-        const Val = await User.find().find({_id:req.user._id})
+        const Val = await User.find(keyword).find({_id:req.user._id})
         res.send(Val)
         console.log(req.user._id)
     } catch (error) {
