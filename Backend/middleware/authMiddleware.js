@@ -7,10 +7,7 @@ export const protect = async(req,res,next) =>{
             const token = req.headers.authorization.split(' ')[1]
             const decoded = jwt.verify(token,process.env.SECREAT_KEY)
             req.user = await User.findById(decoded.id).select("-password")
-            if(!token){
-                res.status(401)
-                throw new Error("Not Authorized, no token")
-            }
+            
             next()
         } catch (error) {
             res.status(401)
@@ -18,4 +15,9 @@ export const protect = async(req,res,next) =>{
             
         }
     }
+
+            if(!token){
+                res.status(401)
+                throw new Error("Not Authorized, no token")
+            }
 }
