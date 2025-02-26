@@ -4,6 +4,7 @@ import chats from './data/data.js'
 import cors from 'cors'
 import connectDB from './config/dataBase.js'
 import userRoutes from './routes/userRoute.js'
+import chatRoutes from './routes/chatRoutes.js'
 
 const app = express()
 dotenv.config()
@@ -14,7 +15,8 @@ app.get('/',(req,res)=>{
     res.send("api is running")
 })
 
-app.use('/api/chat', userRoutes)
+app.use('/api/user', userRoutes)
+app.use('/api/chat', chatRoutes)
 
 app.get('/api/chat:id',(req,res)=>{
     const id = req.params.id
